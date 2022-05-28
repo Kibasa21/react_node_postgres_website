@@ -12,12 +12,12 @@ const config = {
 
 //////////////////////////////////////////
 //parte para o banco de dados:
-/*
-tem q colocar os novos dados
+
+
 const client = new Client({
     user: "postgres",
     password: "postgres",
-    host: "database-2.c52knlbcjuc1.us-east-1.rds.amazonaws.com",
+    host: "database-2.cqykstfvwwut.us-east-1.rds.amazonaws.com",
     port: 5432,
     database: "loja"
 })
@@ -27,52 +27,33 @@ client.connect()
     console.log(e);
     process.exit(e);
   })
-*/
+
 //pega os filmes do banco de dados e retorna uma lista de objetos json
 function getFilmes(){
+    /*
     return [{
         id: "0",
         nome: "DeadPool",
         categoria: "acao",
         classificacao: "18",
         duracao: "200"
-    },
-    {
-        id: "1",
-        nome: "Ta dando onda",
-        categoria: "comedia",
-        classificacao: "L",
-        duracao: "160"
-    },
-    {
-        id: "2",
-        nome: "Emoji o filme",
-        categoria: "infantil",
-        classificacao: "L",
-        duracao: "210"
-    },
-    {
-        id: "3",
-        nome: "Senhor dos Aneis",
-        categoria: "Acao",
-        classificacao: "16",
-        duracao: "500"
-    },
-    {
-        id: "4",
-        nome: "Os incriveis",
-        categoria: "infantil",
-        classificacao: "L",
-        duracao: "120"
-    },
-    {
-        id: "5",
-        nome: "Os simpsons",
-        categoria: "humor",
-        classificacao: "12",
-        duracao: "300"
-    }
-    ]
+    }]
+    */
+
+    const sql = `SELECT * FROM mydb.evento`
+    
+    client.query(sql)
+    .then(res =>{
+        let lista = []
+        for (let row of res.rows) {
+            lista.push(row);
+        }
+        console.log(lista)
+        return lista
+    })
+    .catch(e => {console.error(e)})
+    
+    
 }
 //fim da parte para o banco de dados
 //////////////////////////////////////////
@@ -92,3 +73,4 @@ root em: http://127.0.0.1:${config.port}/
 ou em: http://localhost:${config.port}/
 `))
 
+getFilmes()
