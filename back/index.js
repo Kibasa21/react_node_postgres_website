@@ -40,7 +40,11 @@ function getFilmes(){
     }]
     */
 
-    const sql = `SELECT * FROM mydb.evento`
+    const sql = `
+    select ev.id, ev.titulo, ev.descricao, ev.img, ca.nome, ev.datas from mydb.evento ev
+    join mydb.evento_has_categoria on(evento_id = ev.id)
+    join mydb.categoria ca on(categoria_id = ca.id)
+    `
     
     client.query(sql)
     .then(res =>{
