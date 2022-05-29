@@ -19,11 +19,11 @@ export default function MainContent(){
 
     const elem = filmes.map(filme =>{
         return <Card
-            nome={filme["nome"]}
-            categoria={filme["categoria"]}
-            classificacao={filme["classificacao"]}
-            duracao={filme["duracao"]}
-            id = {filme.id}
+            nome={filme["titulo"]}
+            categoria={filme["nome"]}
+            datas={filme["datas"]}
+            img = {filme["img"]}
+            id = {filme["id"]}
         />
     })
     

@@ -1,14 +1,9 @@
 import React from "react"
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import pic from "../images/empty.png"
-import c00 from "../images/0-anos.png"
-import c10 from "../images/10-anos.png"
-import c12 from "../images/12-anos.png"
-import c14 from "../images/14-anos.png"
-import c16 from "../images/16-anos.png"
-import c18 from "../images/18-anos.png"
 
 export default function Card(props){
+    /*
     let foto;
     switch(props["classificacao"]){
         case "L":
@@ -33,11 +28,19 @@ export default function Card(props){
             foto = pic;
             break;
     }
+    */
+
+    let fotoEvento;
+    if(props[img] == null){
+        fotoEvento = pic
+    }
+
+    let foto
 
     return(
         <div className="movie">
             <img src={pic} alt=""/>
-            <h3>{props.nome}</h3>
+            <h3>{props.titulo}</h3>
             <div className="info-group">
                 <p>Genero: {props.categoria}</p>
             </div>
@@ -48,7 +51,7 @@ export default function Card(props){
             </div>
 
             <div className="info-group">
-                <p>Duracao: {props.duracao}minutos</p>
+                <p>Data: {props.data}</p>
             </div>
 
             <div className="info-button">
