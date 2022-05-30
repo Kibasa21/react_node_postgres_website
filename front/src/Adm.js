@@ -1,20 +1,25 @@
 import React, { useRef, useState } from "react";
 import apiClient from "./services/api";
+import Header from "./components/HeaderMain";
+import Footer from "./components/Footer";
 
 export default function App() {
   const post_title = useRef(null);
   const post_description = useRef(null);
   const [postResult, setPostResult] = useState(null);
+
+  const [form, setForm] = useState({
+    title: '',
+    description: '',
+  })
+
   const fortmatResponse = (res) => {
     return JSON.stringify(res, null, 2);
   };
   async function postData() {
-    const postData = {
-      title: post_title.current.value,
-      description: post_description.current.value,
-    };
+    const postData = form;
     try {
-      const res = await apiClient.post("/teste", postData, {
+      const res = await apiClient.post("/cadastrarEvento", postData, {
         headers: {
           "x-access-token": "token-value",
         },
@@ -34,20 +39,21 @@ export default function App() {
   };
   return (
     <div id="app" className="container">
+      <Header/>
       <div className="card">
         <div className="card-header">Cadastrar Eventos:</div>
         <div className="card-body">
           <div className="form-group">
-            <input type="text" className="form-control" ref={post_title} placeholder="Nome do evento" />
+            <input type="text" className="form-control" placeholder="Nome do evento" onBlur={(e) => setForm({...form, title: e.target.value})}/>
           </div>
           <div className="form-group">
-            <input type="text" className="form-control" ref={post_description} placeholder="descrição do evento" />
+            <input type="text" className="form-control" placeholder="descrição do evento" />
           </div>
           <button className="btn btn-sm btn-primary" onClick={postData}>Criar!</button>
-          <button className="btn btn-sm btn-warning ml-2" onClick={clearPostOutput}>Clear</button>
           { postResult && <div className="alert alert-secondary mt-2" role="alert"><pre>{postResult}</pre></div> }
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
