@@ -22,8 +22,8 @@ export default function MainContent(){
             nome={filme["titulo"]}
             categoria={filme["nome"]}
             datas={filme["datas"]}
-            img = {filme["img"]}
-            id = {filme["id"]}
+            img={filme["img"]}
+            id={filme["id"]}
         />
     })
     

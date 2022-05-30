@@ -19,20 +19,24 @@ export default function AppCard(props){
             })
     }, [])
 
-
     return(
         <div>
             <Header/>
             <div className="movies-container-AppCard">
-                <Card 
-                    nome={filme.nome}
-                    categoria={filme.categoria}
-                    classificacao={filme.classificacao}
-                    duracao={filme.duracao}
-                    id={type}
-                />
+            <Card
+                nome={filme["titulo"]}
+                categoria={filme["nome"]}
+                datas={filme["datas"]}
+                img={filme["img"]}
+                id={filme["id"]}
+            />
             </div>
             <Footer/>
+            <div className="descricao-evento">
+                <h1>Descrição:</h1>
+                {filme.descricao}
+            </div>
+            
         </div>
     )
 }
