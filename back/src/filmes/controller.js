@@ -9,24 +9,25 @@ const getFilmes = (req, res) =>{
 }
 
 const addFilme = (req, res) =>{
-    const { titulo, descricao } = req.body;
+    const { title, description } = req.body;
+    console.log(title)
+    console.log("descricao: "+ description)
     const id = Math.round(Math.random()*1000000)
     //adicionando evento ao db
-    pool.query(queries.addFilme, [id, titulo, descricao], (error, results)=>{
+    pool.query(queries.addFilme, [id, title, description], (error, results)=>{
         if(error) throw error;
-        res.status(201).send("evento cadastrado!")
         console.log("evento cadastrado")
-    })
-}
 
-const teste = (req, res) =>{
-    const {palavra} = req.body;
-    console.log(palavra)
+        pool.query(queries.addCategoria, [id], (error2, results2)=>{
+            if(error) throw error;
+            res.status(201).send("evento cadastrado!")
+            console.log("categoria do evento cadastada")
+        })
+    })
+    
 }
 
 module.exports ={
     getFilmes,
     addFilme,
-    
-    teste
 };
